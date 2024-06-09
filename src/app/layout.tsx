@@ -2,10 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, Roboto, Noto_Sans_JP } from 'next/font/google';
 
 import { JoyUIThemeProvider } from '@/components/JoyUIThemeProvider';
-
-const inter = Inter({ subsets: ['latin'] });
-const roboto = Roboto({ subsets: ['latin'], weight: '400' });
-const notosansjp = Noto_Sans_JP({ subsets: ['latin'] });
+import Sidebar from '@/components/Sidebar/Sidebar';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -19,8 +16,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={notosansjp.className}>
-        <JoyUIThemeProvider>{children}</JoyUIThemeProvider>
+      <body>
+        <JoyUIThemeProvider>
+          <Sidebar />
+          {children}
+        </JoyUIThemeProvider>
       </body>
     </html>
   );
