@@ -1,11 +1,16 @@
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import { Box, Button, useColorScheme } from '@mui/joy';
+import { SxProps } from '@mui/joy/styles/types';
 
-export function ToggleThemeButton() {
+type Props = {
+  sx?: SxProps;
+};
+
+export function ToggleThemeButton({ sx }: Props) {
   const { mode, setMode } = useColorScheme();
   return (
-    <Button onClick={onClick}>
+    <Button onClick={onClick} sx={sx}>
       <Box display='flex' alignItems='center' gap={0.5}>
         {mode === 'light' ? (
           <>
