@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { Box, Button, Input, Textarea } from '@mui/joy';
+import { Box, Button, Textarea } from '@mui/joy';
 
 import { Message } from '@/types/Chat';
 
@@ -29,7 +29,9 @@ export default function Page() {
         <MessageContainer messages={messages} />
         <Box display='flex' gap={1}>
           <Textarea value={value} onChange={onChange} sx={{ flexGrow: 1 }} />
-          <Button sx={{}}>送信</Button>
+          <Button onClick={onClick} sx={{ flex: '0 0 4rem' }}>
+            送信
+          </Button>
         </Box>
       </Box>
     </Box>
@@ -37,5 +39,17 @@ export default function Page() {
 
   function onChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     setValue(event.target.value);
+  }
+
+  function onClick() {
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: String(prev.length + 1),
+        sender: 'User',
+        content: value,
+      },
+    ]);
+    setValue('');
   }
 }
