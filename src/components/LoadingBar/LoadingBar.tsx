@@ -33,7 +33,7 @@ export function LoadingBar() {
   }, [loadingStatus]);
 
   return (
-    <Box position='absolute' top={0} left={0} width='100%' zIndex={1}>
+    <Box width='100%' position='absolute' top={0} left={0} zIndex={1}>
       {loadingStatus != 'idle' && (
         <LinearProgress
           size='sm'
@@ -61,7 +61,7 @@ export function LoadingBar() {
     setDeterminate(true);
 
     // 時間差でプログレスバーを非表示にする
-    const time = loadingStatus === 'error' ? 4000 : 800;
+    const time = loadingStatus === 'error' ? 4000 : 2000;
     const timeout = setTimeout(() => {
       setLoadingStatus('idle');
     }, time);

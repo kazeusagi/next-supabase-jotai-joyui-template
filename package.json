@@ -6,18 +6,24 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "supa:start": "supabase start",
+    "supa:stop": "supabase stop",
+    "supa:types": "supabase gen types typescript --local > src/types/supabase.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.19",
     "@mui/joy": "^5.0.0-beta.36",
+    "@supabase/supabase-js": "^2.43.4",
     "jotai": "^2.8.3",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
-    "react-icons": "^5.2.1"
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^5.2.1",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
@@ -28,6 +34,7 @@
     "eslint-config-next": "14.2.3",
     "prettier": "^3.3.1",
     "supabase": "^1.172.2",
+    "ts-to-zod": "^3.8.5",
     "typescript": "^5"
   }
 }

@@ -14,8 +14,13 @@ import { SidebarList } from './SidebarList';
 // 表示するリストアイテム
 const listItems: ListItemType[] = [
   { labelIcon: <HomeRoundedIcon />, labelText: 'Home', href: '/' },
+  { labelIcon: <DashboardRoundedIcon />, labelText: 'chat', href: '/chat' },
   { labelIcon: <DashboardRoundedIcon />, labelText: 'sample', href: '/sample' },
   { labelIcon: <ShoppingCartRoundedIcon />, labelText: 'example', href: '/example' },
+  { labelIcon: <ShoppingCartRoundedIcon />, labelText: 'example2', href: '/teams/aa' },
+  { labelIcon: <ShoppingCartRoundedIcon />, labelText: 'example3', href: '/teams/ii' },
+  { labelIcon: <ShoppingCartRoundedIcon />, labelText: 'example4', href: '/example/ui' },
+  { labelIcon: <ShoppingCartRoundedIcon />, labelText: 'example5', href: '/example/eo' },
 ];
 
 export function Sidebar() {

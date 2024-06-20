@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import { Box } from '@mui/joy';
+import { Toaster } from 'react-hot-toast';
 
 import { JoyUIThemeProvider } from '@/components/JoyUIThemeProvider';
 import { LoadingBar } from '@/components/LoadingBar';
@@ -19,8 +20,9 @@ export default function RootLayout({
   return (
     <html lang='ja'>
       <body>
+        <Toaster />
         <JoyUIThemeProvider>
-          <LoadingBar></LoadingBar>
+          <LoadingBar />
           <Box component='main' display='flex'>
             <Sidebar />
             <Box width='100%' p={2}>
