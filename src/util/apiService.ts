@@ -9,3 +9,16 @@ export async function GetSampleData() {
   const json = await response.json();
   return json;
 }
+
+export async function ask(message: string) {
+  const response = await fetch('/api/openai', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ message }),
+  });
+
+  const result = await response.text();
+  return result;
+}

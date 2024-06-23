@@ -5,6 +5,7 @@ import { useRef, useState } from 'react';
 import { Box, Button, Textarea } from '@mui/joy';
 
 import { Message } from '@/types/Chat';
+import { ask } from '@/util/apiService';
 
 import { MessageContainer } from './components/MessageContainer';
 
@@ -43,7 +44,7 @@ export default function Page() {
     setValue(event.target.value);
   }
 
-  function onClick() {
+  async function onClick() {
     setMessages((prev) => [
       ...prev,
       {
@@ -54,13 +55,23 @@ export default function Page() {
     ]);
     setValue('');
 
-    // SSE
-    if (eventSourceRef.current) return;
+    const result = await ask(value);
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: String(prev.length + 1),
+        sender: 'Bot',
+        content: result,
+      },
+    ]);
 
-    const eventSource = new EventSource('/api/openai');
-    eventSourceRef.current = eventSource;
-    eventSource.onmessage = (event) => {
-      setValue((prev) => prev + event.data);
-    };
+    // SSE
+    // if (eventSourceRef.current) return;
+
+    // const eventSource = new EventSource('/api/openai');
+    // eventSourceRef.current = eventSource;
+    // eventSource.onmessage = (event) => {
+    //   setValue((prev) => prev + event.data);
+    // };
   }
 }

@@ -4,19 +4,25 @@ import OpenAI from 'openai';
 
 const openai = new OpenAI();
 
-export async function GET() {
+export async function POST(request: Request) {
+  const body = await request.json();
+  const userMessage = body.message || '';
+
   // const stream = new TransformStream();
   // const writer = stream.writable.getWriter();
   // const encoder = new TextEncoder();
 
+  let responseMessage = '';
+
   const completions = await openai.beta.chat.completions.stream({
     model: 'gpt-3.5-turbo',
-    messages: [{ role: 'user', content: 'Pythonについて少し教えて' }],
+    messages: [{ role: 'user', content: userMessage }],
     stream: true,
   });
 
   completions.on('content', (delta, snapshot) => {
     console.log(delta);
+    responseMessage += delta;
   });
 
   // // or, equivalently:
@@ -47,7 +53,7 @@ export async function GET() {
   //   data: 'Hello, world!',
   // });
 
-  return new NextResponse('aa', {
+  return new NextResponse(responseMessage, {
     headers: {
       'Content-Type': 'text/plain',
       // 'Content-Type': 'text/event-stream',
