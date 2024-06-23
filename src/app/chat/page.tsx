@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { Box, Button, Textarea } from '@mui/joy';
 
@@ -9,6 +9,8 @@ import { Message } from '@/types/Chat';
 import { MessageContainer } from './components/MessageContainer';
 
 export default function Page() {
+  const eventSourceRef = useRef<EventSource | null>(null);
+
   const [value, setValue] = useState('');
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -51,5 +53,14 @@ export default function Page() {
       },
     ]);
     setValue('');
+
+    // SSE
+    if (eventSourceRef.current) return;
+
+    const eventSource = new EventSource('/api/openai');
+    eventSourceRef.current = eventSource;
+    eventSource.onmessage = (event) => {
+      setValue((prev) => prev + event.data);
+    };
   }
 }
